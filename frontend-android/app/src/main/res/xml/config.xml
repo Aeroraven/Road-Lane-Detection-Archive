@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.aeroraven.roadlane" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Road Lane Detection</name>
+    <description>Road Lane Detection App for Tongji SSE Course Project.</description>
+    <author email="1531052461@qq.com" href="https://github.com/Aeroraven">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="scheme" value="http" />
+</widget>

@@ -1,0 +1,170 @@
+# This is the server-side configuration file
+# Do not add any non-ascii characters in this file.
+
+# =============================
+# Data Preprocessing
+# =============================
+
+# Folder that contains raw (unprocessed) images downloaded from the Internet
+source_image_path: "E:\\MNIST\\train_set\\clips\\0601"
+source_mask_path: "C:\\Users\\Administrator\\Desktop\\dataset\\train_set_trapezoid"
+
+# Folder to put processed images (in .npy files)
+output_image_path: "E:\\MNIST\\train_set\\clips\\0601b"
+output_mask_path: "C:\\Users\\Administrator\\Desktop\\dataset\\tm"
+output_numpy_file: false
+
+# Share for train set
+train_test_ratio: 0.8
+
+# Trapezoid Processing
+trapezoid_path: "C:\\Users\\Administrator\\Desktop\\dataset\\trapezoid"
+trapezoid_output_path : "C:\\Users\\Administrator\\Desktop\\dataset\\trapezoid_op"
+
+# =============================
+# Dataset
+# =============================
+
+# Dataset Type
+dataset_type: "apollo" # [tu_simple]
+
+# Folder for runner
+train_image_path: "C:\\Users\\Administrator\\Desktop\\dataset\\ssr2\\image"
+train_mask_path: "C:\\Users\\Administrator\\Desktop\\dataset\\ll_seg_annotations_6\\bdd_lane_gt\\train"
+
+train_image_path_2: "C:\\Users\\Administrator\\Desktop\\dataset\\ssr2\\image"
+train_mask_path_2: "C:\\Users\\Administrator\\Desktop\\dataset\\ssr2\\label"
+
+train_image_path_culane: "C:\\Users\\Administrator\\Desktop\\dataset\\driver_161_90frame.tar"
+train_mask_path_culane: "C:\\Users\\Administrator\\Desktop\\dataset\\culane_seg"
+
+# Folder for testing
+test_image_path: "C:\\Users\\Administrator\\Desktop\\dataset\\ssr2\\image"
+test_mask_path: "C:\\Users\\Administrator\\Desktop\\dataset\\ll_seg_annotations_6\\bdd_lane_gt\\val"
+
+test_image_path_2: "C:\\Users\\Administrator\\Desktop\\dataset\\ssr2\\image"
+test_mask_path_2: "C:\\Users\\Administrator\\Desktop\\dataset\\ssr2\\label"
+
+
+test_image_path_culane: "C:\\Users\\Administrator\\Desktop\\dataset\\driver_161_90frame.tar"
+test_mask_path_culane: "C:\\Users\\Administrator\\Desktop\\dataset\\culane_seg"
+
+
+# Attributes of the dataset
+classes: 2
+numpy_dataset: false
+mask_augmentation: true
+expand_onehot: true
+
+image_scale_w: 800
+image_scale_h: 480
+
+# Extended Params for Tu-Simple
+tu_simple_train_list:
+  - '0313-1'
+  - '0531'
+  - '0601'
+
+
+tu_simple_test_list:
+  - '0313-2'
+  - '0531'
+  - '0601'
+
+tu_simple_trapezoid_model: ''
+
+# =============================
+# Runtime Environment
+# =============================
+
+# Folder to place logs & checkpoints
+base_workspace_path: "C:\\Users\\Administrator\\Desktop\\ckpt"
+
+# Name of your experiment
+experiment_name: "arrowfcn"
+
+# Environment Settings
+dataset_preload: false
+random_seed: 3407
+enable_test: true
+device: "cuda"
+num_workers: 2
+
+# Resuming
+# Resuming is NOT RECOMMENDED for it's function is not complete
+enable_resume: false
+resume_path: 'C:\\Users\\Administrator\\Desktop\\ckpt\\yolop_(2022-04-07_21-39-26)\\last.pth'
+resume_epoch: 40
+
+# Options for Mixed dataset
+disable_apollo: false
+
+# =======================================
+# Training Hyper-parameters
+# =======================================
+
+# Training Hyper-parameters
+model_arch: "alwen2"
+lr: 4.0e-4  # Learning Rate
+lr_sched: true 
+lr_sched_scheme: 'steplr'
+epochs: 80
+batch_size: 2
+backprop_iteration_interval: 1
+loss: "alwen2_loss"
+optim: "adam"
+
+warmup_epochs: 10 # deprecated
+warmup_lr: 1.0e-5 # deprecated
+
+# =======================================
+# Extended Hyperp-parameters
+# =======================================
+
+# Extended Hyper-parameters (SMP)
+encoder_arch: "resnet50" # Encoder Architecture
+pretrained_encoder_weight: "imagenet"
+final_activation: "sigmoid"
+
+# Extended Hyper-parameters (SCNN)
+scnn_backbone: "vgg16"
+
+# Extended Hyper-parameters (SwiftLane)
+swift_c: 4
+swift_h: 18
+# swift_h must be 18 for CULaneMK3 & CULaneMK4
+swift_w: 200
+
+swift_w_modifier: 10 # Grid Width
+# swift_w_modifier is deprecated for CULaneMK4
+
+# Extended Hyper-parameters (YOLOP)
+yolop_lrf: 0.001
+yolop_pad: [0,8]
+
+
+# Extended Hyper-parameters (AL)
+skip_arrow: false
+
+# =======================================
+# Visualization
+# =======================================
+
+# Visualizer
+model_path: "C:\\Users\\Administrator\\Desktop\\ckpt\\yolop.onnx"
+visualizer_device: "cpu" # For ONNX runner: ['cuda','cpu','tensor_rt'] / For torch runner: ['cuda','cpu']
+output_shape_x: 512
+output_shape_y: 512
+
+# TuSimple & SwiftLane Modifier
+tu_height_modifier: 0.208 #0.208 default
+
+# =======================================
+# Model Inference
+# =======================================
+
+# Deployment & Inference
+input_model_path: "C:\\Users\\Administrator\\Desktop\\ckpt\\arrow_(2022-04-10_23-43-05)\\last.pth"
+output_model_path: "C:\\Users\\Administrator\\Desktop\\ckpt\\arrow.onnx"
+deploy_device: "cuda"
+infer_device: "cpu" # For ONNX runner: ['cuda','cpu','tensor_rt'] / For torch runner: ['cuda','cpu']

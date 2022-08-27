@@ -1,7 +1,7 @@
 ## Road Lane Detection
 This is the public repository for Comprehensive Design (Machine Intelligence/Digital Media), Software Engineering School, Tongji University.
 
-Several files are not uploaded to this public repo, including trained models. **So the software cannot be launched or cannot function normally**
+Several files are not uploaded to this public repo, including trained models, model implementations. **So the software IN THIS REPO cannot be launched or cannot function normally**
 
 
 
